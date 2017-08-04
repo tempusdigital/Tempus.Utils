@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <TargetFramework>net452</TargetFramework>
+      <ApplicationIcon>logo.ico</ApplicationIcon>
+      <Authors>Tempus Digital</Authors>
+      <Company>Tempus Digital</Company>
+      <Description>Commom functions and extensions used on Asp.Net Core Tempus Digital's projects.</Description>
+      <Copyright>Copyright 2017 Tempus Digital LDTA ME</Copyright>
+      <PackageLicenseUrl>https://github.com/tempusdigital/Tempus.Utils/blob/master/LICENCE</PackageLicenseUrl>
+      <PackageProjectUrl>https://github.com/tempusdigital/Tempus.Utils</PackageProjectUrl>
+      <PackageIconUrl>https://raw.githubusercontent.com/tempusdigital/Tempus.Utils/master/Tempus.Utils/logo-64.png</PackageIconUrl>
+      <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
+      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+      <PackageTags>extensions csharp dotnet utils aspnetcore</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Tempus.Utils" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Recurso.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Recurso.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Recurso.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Recurso.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

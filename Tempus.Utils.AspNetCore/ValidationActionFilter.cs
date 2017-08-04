@@ -55,7 +55,7 @@
             if (validationErrors.Any())
             {
                 var errors = validationErrors
-                    .GroupBy(e => e.PropertyName.ToCamelCase())
+                    .GroupBy(e => e.PropertyName)
                     .ToDictionary(g => g.Key, g => g.Select(e => e));
 
                 var result = new ErrorResultViewModel(errors);
@@ -182,7 +182,7 @@
 
         IEnumerable<ErrorViewModel> GetMessagesFromConcurrencyExpection(ActionExecutedContext context)
         {
-            if (context.Exception != null && (context.Exception.GetType().Name == "DbUpdateConcurrencyException" || context.Exception.InnerException.GetType().Name == "DbUpdateConcurrencyException"))
+            if (context.Exception?.GetType()?.Name == "DbUpdateConcurrencyException" || context.Exception?.InnerException?.GetType()?.Name == "DbUpdateConcurrencyException")
             {
                 yield return new ErrorViewModel("", "", Recurso.ErroDeConcorrencia);
             }

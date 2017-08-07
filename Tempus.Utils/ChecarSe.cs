@@ -27,6 +27,19 @@
             }
         }
 
+
+        public static void ArgumentoNaoNulo<TArgumento>(TArgumento? argumento, string nomeDoArgumento = null)
+            where TArgumento : struct
+        {
+            if (argumento == null)
+            {
+                if (nomeDoArgumento != null)
+                    throw new ArgumentNullException(nomeDoArgumento);
+
+                throw new ArgumentNullException();
+            }
+        }
+
         public static void ArgumentoNaoVazio<TArgumento>(IEnumerable<TArgumento> argumento, string nomeDoArgumento = null)
         {
             if (argumento == null || argumento.Count() == 0)

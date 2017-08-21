@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-      <TargetFramework>net452</TargetFramework>
+      <TargetFrameworks>netstandard2.0</TargetFrameworks>
       <ApplicationIcon>logo.ico</ApplicationIcon>
       <Authors>Tempus Digital</Authors>
       <Company>Tempus Digital</Company>
@@ -13,6 +13,7 @@
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp dotnet utils</PackageTags>
+      <Version>2.0.0</Version>
   </PropertyGroup>
 
 </Project>

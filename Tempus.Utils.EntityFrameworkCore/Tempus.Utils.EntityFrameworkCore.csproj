@@ -13,8 +13,8 @@
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp entityframework entity-framework conventions</PackageTags>
-      <AssemblyVersion>0.0.1.0</AssemblyVersion>
-      <Version>0.0.1</Version>
+      <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

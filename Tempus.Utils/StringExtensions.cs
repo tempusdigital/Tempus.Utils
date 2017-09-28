@@ -1,6 +1,7 @@
 ﻿namespace Tempus.Utils
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
@@ -117,6 +118,20 @@
         {
             // Fonte: http://stackoverflow.com/questions/3977497/stripping-out-non-numeric-characters-in-string
             return new string(source.Where(c => char.IsDigit(c)).ToArray());
+        }
+
+        public static string RemoveAccents(this string text)
+        {
+            var sbReturn = new StringBuilder();
+            var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
+
+            foreach (char letter in arrayText)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
+                    sbReturn.Append(letter);
+            }
+
+            return sbReturn.ToString();
         }
     }
 }

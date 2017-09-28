@@ -1,19 +1,19 @@
-﻿namespace Tempus.Utils.AspNetCore
-{
-    using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
-    using FluentValidation;
-    using Microsoft.AspNetCore.Mvc.Filters;
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Microsoft.AspNetCore.Cors.Infrastructure;
-    using Newtonsoft.Json;
-    using System.Data.SqlClient;    // ToDo: adicionar testes unitários
-    using System;
-    using System.Text;
-    using Tempus.Utils;
-    using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Newtonsoft.Json;
+using System.Data.SqlClient;    // ToDo: adicionar testes unitários
+using System;
+using System.Text;
+using System.Net;
+using Tempus.Utils;
 
+namespace Tempus.Utils.AspNetCore
+{
     // ToDo: tratar erros de permissão
     // ToDo: tratar erros de autenticação
     /// <summary>
@@ -21,7 +21,7 @@
     /// Se estiver em debug também retorna as mensagens das exceções não tratadas.
     /// Fonte: <seealso cref="https://goo.gl/pOB0ka"/>
     /// </summary>
-    public class ValidationActionFilter : IActionFilter, IOrderedFilter
+    public class JsonApiValidationActionFilter : IActionFilter, IOrderedFilter
     {
         // Return a high number by default so that it runs closest to the action.
         public int Order { get; set; } = int.MaxValue - 10;

@@ -1,10 +1,27 @@
 ﻿namespace Tempus.Utils.AspNetCore
 {
+    using HeyRed.Mime;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
+    using System.IO;
+    using System.Linq;
 
     public static class ControllerExtensions
     {
+        public static IActionResult DownloadFile(this Controller source, string filePath)
+        {
+            if (!File.Exists(filePath))
+                return source.NotFound();
+
+            var name = filePath.Split('\\').Last();
+
+            var mimeType = MimeGuesser.GuessMimeType(filePath);
+
+            var stream = new FileStream(filePath, FileMode.Open);
+
+            return source.File(stream, mimeType, name);
+        }
+
         public static ActionResult RedirectToActionJson<TController>(this TController source, string action)
             where TController : Controller
         {

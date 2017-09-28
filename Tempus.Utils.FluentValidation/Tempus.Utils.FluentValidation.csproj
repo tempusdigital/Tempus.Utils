@@ -12,8 +12,18 @@
       <PackageIconUrl>https://raw.githubusercontent.com/tempusdigital/Tempus.Utils/master/Tempus.Utils/logo-64.png</PackageIconUrl>
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-      <PackageTags>extensions csharp dotnet utils</PackageTags>
-      <Version>2.1.0</Version>
+      <PackageTags>extensions csharp dotnet utils fluentvalidation fluent-validation</PackageTags>
+      <Version>0.0.1</Version>
+      <AssemblyVersion>0.0.1.0</AssemblyVersion>
+      <FileVersion>0.0.1.0</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="7.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tempus.Utils\Tempus.Utils.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -13,15 +13,22 @@
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp dotnet utils aspnetcore</PackageTags>
-      <AssemblyVersion>2.1.0.0</AssemblyVersion>
-      <Version>2.1.0</Version>
+      <AssemblyVersion>3.0.1.0</AssemblyVersion>
+      <Version>3.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="7.1.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Mime" Version="2.3.5" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
     <PackageReference Include="Tempus.Utils" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tempus.Utils.FluentValidation\Tempus.Utils.FluentValidation.csproj" />
+    <ProjectReference Include="..\Tempus.Utils\Tempus.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

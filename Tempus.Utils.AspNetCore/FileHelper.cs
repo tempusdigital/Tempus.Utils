@@ -22,7 +22,7 @@
                 Directory.CreateDirectory(caminho);
 
             var dataHora = DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
-            var nomeArquivo = dataHora + " - " + arquivo.FileName;
+            var nomeArquivo = dataHora + " - " + Path.GetFileName(arquivo.FileName);
 
             var filePath = Path.Combine(caminho, nomeArquivo);
             using (var fileStream = new FileStream(filePath, FileMode.Create))

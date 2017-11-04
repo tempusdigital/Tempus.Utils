@@ -13,16 +13,16 @@
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp dotnet utils aspnetcore</PackageTags>
-      <AssemblyVersion>3.0.2.0</AssemblyVersion>
-      <Version>3.0.2</Version>
-      <PackageReleaseNotes>Fix FileHelper.SaveFile for old IE</PackageReleaseNotes>
+      <AssemblyVersion>3.1.0.0</AssemblyVersion>
+      <Version>3.1.0-beta1</Version>
+      <PackageReleaseNotes>Fix Mime Guesser for non .Net Core Apps</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="7.1.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
-    <PackageReference Include="Mime" Version="2.3.5" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
     <PackageReference Include="Tempus.Utils" Version="2.0.0" />
   </ItemGroup>

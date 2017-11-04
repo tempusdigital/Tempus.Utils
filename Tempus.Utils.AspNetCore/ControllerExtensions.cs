@@ -1,7 +1,7 @@
 ﻿namespace Tempus.Utils.AspNetCore
 {
-    using HeyRed.Mime;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.StaticFiles;
     using Newtonsoft.Json;
     using System.IO;
     using System.Linq;
@@ -15,7 +15,10 @@
 
             var name = filePath.Split('\\').Last();
 
-            var mimeType = MimeGuesser.GuessMimeType(filePath);
+            new FileExtensionContentTypeProvider().TryGetContentType(filePath, out var mimeType);
+
+            if (string.IsNullOrWhiteSpace(mimeType))
+                mimeType = "application/octet-stream";
 
             var stream = new FileStream(filePath, FileMode.Open);
 

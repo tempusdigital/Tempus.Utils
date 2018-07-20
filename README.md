@@ -1,2 +1,2 @@
 # Tempus.Utils
-Commom functions and extensions used on Tempus Digital's projects.
+Common functions and extensions used on Tempus Digital's projects.

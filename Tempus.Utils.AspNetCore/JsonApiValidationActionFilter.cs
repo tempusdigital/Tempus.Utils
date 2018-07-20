@@ -41,8 +41,7 @@ namespace Tempus.Utils.AspNetCore
 
             context.ExceptionHandled =
                 ProcessNotFoundException(context)
-                || ProcessValidationException(context)
-                || ProcessInternalServerError(context);
+                || ProcessValidationException(context);
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -87,27 +86,7 @@ namespace Tempus.Utils.AspNetCore
                         }
                 }
         }
-
-        bool ProcessInternalServerError(ActionExecutedContext context)
-        {
-            if (context.HttpContext.Request.Headers.ContainsKey(CorsConstants.Origin))
-            {
-#if DEBUG
-                context.HttpContext.Response.StatusCode = 500;
-                context.Result = new JsonResult(new
-                {
-                    Message = GetExceptionsMessages(context.Exception),
-                    Stack = GetExceptionsStackTraces(context.Exception)
-                });
-#else
-                context.Result = new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-#endif
-                return true;
-            }
-
-            return false;
-        }
-
+        
         string GetExceptionsMessages(Exception exception)
         {
             var messages = new StringBuilder();

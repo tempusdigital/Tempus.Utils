@@ -14,7 +14,7 @@
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp dotnet utils aspnetcore</PackageTags>
       <AssemblyVersion>3.2.0.0</AssemblyVersion>
-      <Version>3.2.0-beta2</Version>
+      <Version>3.2.0-beta3</Version>
       <PackageReleaseNotes>Add ModelState.TryAddModelError function</PackageReleaseNotes>
   </PropertyGroup>
 

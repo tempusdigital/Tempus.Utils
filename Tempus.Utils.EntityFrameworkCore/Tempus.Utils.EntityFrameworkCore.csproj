@@ -5,7 +5,7 @@
       <ApplicationIcon>logo.ico</ApplicationIcon>
       <Authors>Tempus Digital</Authors>
       <Company>Tempus Digital</Company>
-      <Description>Commom functions and extensions used on Asp.Net Core Tempus Digital's projects.</Description>
+      <Description>Common functions and extensions used on Asp.Net Core Tempus Digital's projects.</Description>
       <Copyright>Copyright 2017 Tempus Digital LDTA ME</Copyright>
       <PackageLicenseUrl>https://github.com/tempusdigital/Tempus.Utils/blob/master/LICENCE</PackageLicenseUrl>
       <PackageProjectUrl>https://github.com/tempusdigital/Tempus.Utils</PackageProjectUrl>

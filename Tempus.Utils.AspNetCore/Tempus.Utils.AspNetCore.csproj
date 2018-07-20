@@ -5,7 +5,7 @@
       <ApplicationIcon>logo.ico</ApplicationIcon>
       <Authors>Tempus Digital</Authors>
       <Company>Tempus Digital</Company>
-      <Description>Commom functions and extensions used on Asp.Net Core Tempus Digital's projects.</Description>
+      <Description>Common functions and extensions used on Asp.Net Core Tempus Digital's projects.</Description>
       <Copyright>Copyright 2017 Tempus Digital LDTA ME</Copyright>
       <PackageLicenseUrl>https://github.com/tempusdigital/Tempus.Utils/blob/master/LICENCE</PackageLicenseUrl>
       <PackageProjectUrl>https://github.com/tempusdigital/Tempus.Utils</PackageProjectUrl>
@@ -13,9 +13,9 @@
       <RepositoryUrl>https://github.com/tempusdigital/Tempus.Utils</RepositoryUrl>
       <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
       <PackageTags>extensions csharp dotnet utils aspnetcore</PackageTags>
-      <AssemblyVersion>3.1.0.0</AssemblyVersion>
-      <Version>3.1.0-beta1</Version>
-      <PackageReleaseNotes>Fix Mime Guesser for non .Net Core Apps</PackageReleaseNotes>
+      <AssemblyVersion>3.2.0.0</AssemblyVersion>
+      <Version>3.2.0-beta2</Version>
+      <PackageReleaseNotes>Add ModelState.TryAddModelError function</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -11,6 +11,7 @@ using System;
 using System.Text;
 using System.Net;
 using Tempus.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace Tempus.Utils.AspNetCore
 {
@@ -23,12 +24,19 @@ namespace Tempus.Utils.AspNetCore
     /// </summary>
     public class JsonApiValidationActionFilter : IActionFilter, IOrderedFilter
     {
+        readonly ILogger _logger;
+
+        public JsonApiValidationActionFilter(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<JsonApiValidationActionFilter>();
+        }
+
         // Return a high number by default so that it runs closest to the action.
         public int Order { get; set; } = int.MaxValue - 10;
-
+        
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Exception == null && !context.ExceptionHandled)
+            if (context.ExceptionHandled)
                 return;
 
             context.ExceptionHandled =
@@ -44,13 +52,10 @@ namespace Tempus.Utils.AspNetCore
 
         bool ProcessValidationException(ActionExecutedContext context)
         {
-            var validationErrors = new List<ErrorViewModel>();
+            if (context.Exception != null && context.ModelState.TryAddModelError(context.Exception))
+                _logger.LogError(context.Exception, "A validation exception occurred. It was returned to the client as a HTTP Status Code 400 fail.");
 
-            validationErrors.AddRange(GetMessagesFromErpExpection(context));
-            validationErrors.AddRange(GetMessagesFromValidationExpection(context));
-            validationErrors.AddRange(GetMessagesFromDeleteExpection(context));
-            validationErrors.AddRange(GetMessagesFromConcurrencyExpection(context));
-            validationErrors.AddRange(GetValidationMessagesFromModelState(context));
+            var validationErrors = GetValidationMessagesFromModelState(context);
 
             if (validationErrors.Any())
             {
@@ -153,49 +158,6 @@ namespace Tempus.Utils.AspNetCore
             }
 
             return false;
-        }
-
-        IEnumerable<ErrorViewModel> GetMessagesFromErpExpection(ActionExecutedContext context)
-        {
-            if (context.Exception is ServerSideValidationException serverSide)
-            {
-                yield return new ErrorViewModel(serverSide.Message);
-            }
-        }
-
-        IEnumerable<ErrorViewModel> GetMessagesFromValidationExpection(ActionExecutedContext context)
-        {
-            if (context.Exception is ValidationException)
-            {
-                var exception = context.Exception as ValidationException;
-                foreach (var error in exception.Errors)
-                {
-                    var message = string.IsNullOrWhiteSpace(error.ErrorMessage) ? Recurso.predicate_error : error.ErrorMessage;
-
-                    if (string.IsNullOrWhiteSpace(error.ErrorCode))
-                        yield return new ErrorViewModel(error.PropertyName, "custom", message);
-                    else
-                        yield return new ErrorViewModel(error.PropertyName, error.ErrorCode, message);
-                }
-            }
-        }
-
-        IEnumerable<ErrorViewModel> GetMessagesFromConcurrencyExpection(ActionExecutedContext context)
-        {
-            if (context.Exception?.GetType()?.Name == "DbUpdateConcurrencyException" || context.Exception?.InnerException?.GetType()?.Name == "DbUpdateConcurrencyException")
-            {
-                yield return new ErrorViewModel("", "", Recurso.ErroDeConcorrencia);
-            }
-        }
-
-        IEnumerable<ErrorViewModel> GetMessagesFromDeleteExpection(ActionExecutedContext context)
-        {
-            if (context.Exception?.InnerException is SqlException)
-            {
-                var exception = context.Exception.InnerException as SqlException;
-                if (exception.Number == 547 && exception.Message.Contains("DELETE"))
-                    yield return new ErrorViewModel("", "", Recurso.ErroAoExcluir);
-            }
         }
 
         private class ErrorResultViewModel

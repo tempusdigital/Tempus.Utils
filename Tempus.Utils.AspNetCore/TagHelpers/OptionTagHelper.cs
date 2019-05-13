@@ -19,6 +19,8 @@
 
         private const string HiddenAttributeName = "asp-hidden";
 
+        private const string ReadOnlyAttributeName = "asp-readonly";
+
         [HtmlAttributeName(DisabledAttributeName)]
         public bool Disabled { get; set; }
 
@@ -27,6 +29,9 @@
 
         [HtmlAttributeName(HiddenAttributeName)]
         public bool Hidden { get; set; }
+
+        [HtmlAttributeName(ReadOnlyAttributeName)]
+        public bool ReadOnly { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -44,6 +49,9 @@
 
             if (Hidden)
                 output.Attributes.SetAttribute("hidden", null);
+
+            if (ReadOnly)
+                output.Attributes.SetAttribute("readonly", null);
         }
     }
 }

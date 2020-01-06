@@ -34,7 +34,7 @@ namespace Tempus.Utils.AspNetCore
         // Return a high number by default so that it runs closest to the action.
         public int Order { get; set; } = int.MaxValue - 10;
         
-        public void OnActionExecuted(ActionExecutedContext context)
+        public virtual void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.ExceptionHandled)
                 return;
@@ -44,7 +44,7 @@ namespace Tempus.Utils.AspNetCore
                 || ProcessValidationException(context);
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        public virtual void OnActionExecuting(ActionExecutingContext context)
         {
 
         }
@@ -87,43 +87,6 @@ namespace Tempus.Utils.AspNetCore
                 }
         }
         
-        string GetExceptionsMessages(Exception exception)
-        {
-            var messages = new StringBuilder();
-
-            messages.Append("SERVER ERROR: ");
-
-            while (exception != null)
-            {
-                if (!string.IsNullOrWhiteSpace(exception.Message))
-                {
-                    messages.Append(exception.Message);
-
-                    if (exception.InnerException != null)
-                        messages.AppendLine("--- ");
-                }
-
-                exception = exception.InnerException;
-            }
-
-            return messages.ToString();
-        }
-
-        string GetExceptionsStackTraces(Exception exception)
-        {
-            var messages = new StringBuilder();
-
-            while (exception != null)
-            {
-                messages.AppendLine(exception.GetType().FullName);
-                messages.AppendLine(exception.StackTrace);
-
-                exception = exception.InnerException;
-            }
-
-            return messages.ToString();
-        }
-
         bool ProcessNotFoundException(ActionExecutedContext context)
         {
             if (context.Result is NotFoundResult)

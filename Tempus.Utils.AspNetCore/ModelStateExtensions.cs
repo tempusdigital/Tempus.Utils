@@ -60,13 +60,28 @@ namespace Tempus.Utils.AspNetCore
 
         static bool TryProcessDeleteExpection(ModelStateDictionary source, Exception exception)
         {
-            if (exception?.InnerException is SqlException sqlException && sqlException.Number == 547 && sqlException.Message.Contains("DELETE"))
+            if (IsSqlServerException(exception) || IsPostgreException(exception))
             {
                 source.AddModelError("", Recurso.ErroAoExcluir);
                 return true;
             }
 
             return false;
+        }
+
+        static bool IsSqlServerException(Exception exception)
+        {
+            return exception is SqlException sqlException
+                && sqlException.Number == 547
+                && sqlException.Message.Contains("DELETE")
+                || (exception.InnerException != null && IsSqlServerException(exception.InnerException));
+        }
+
+        static bool IsPostgreException(Exception exception)
+        {
+            return exception.GetType().Name == "PostgresException"
+                && exception.Message.Contains("violates foreign key constraint")
+                || (exception.InnerException != null && IsPostgreException(exception.InnerException));
         }
     }
 }

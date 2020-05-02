@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Data.SqlClient;
 
 namespace Tempus.Utils.AspNetCore
 {
@@ -60,7 +59,7 @@ namespace Tempus.Utils.AspNetCore
 
         static bool TryProcessDeleteExpection(ModelStateDictionary source, Exception exception)
         {
-            if (IsSqlServerException(exception) || IsPostgreException(exception))
+            if (IsSqlServerDeleteReferenceException(exception) || IsPostgreDeleteReferenceException(exception))
             {
                 source.AddModelError("", Recurso.ErroAoExcluir);
                 return true;
@@ -69,19 +68,20 @@ namespace Tempus.Utils.AspNetCore
             return false;
         }
 
-        static bool IsSqlServerException(Exception exception)
+        static bool IsSqlServerDeleteReferenceException(Exception exception)
         {
-            return exception is SqlException sqlException
-                && sqlException.Number == 547
-                && sqlException.Message.Contains("DELETE")
-                || (exception.InnerException != null && IsSqlServerException(exception.InnerException));
+            return exception.Message != null
+                && exception.Message.Contains("DELETE")
+                && exception.Message.Contains("REFERENCE")
+                && exception.Message.Contains("constraint")
+                || (exception.InnerException != null && IsSqlServerDeleteReferenceException(exception.InnerException));
         }
 
-        static bool IsPostgreException(Exception exception)
+        static bool IsPostgreDeleteReferenceException(Exception exception)
         {
             return exception.GetType().Name == "PostgresException"
                 && exception.Message.Contains("violates foreign key constraint")
-                || (exception.InnerException != null && IsPostgreException(exception.InnerException));
+                || (exception.InnerException != null && IsPostgreDeleteReferenceException(exception.InnerException));
         }
     }
 }

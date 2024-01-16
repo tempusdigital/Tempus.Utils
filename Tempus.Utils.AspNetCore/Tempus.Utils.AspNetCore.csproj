@@ -24,7 +24,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="Tempus.Utils" Version="2.0.0" />
   </ItemGroup>
 
